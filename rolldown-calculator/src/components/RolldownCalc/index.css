@@ -1,0 +1,340 @@
+/* Container for grid of champions */
+.image-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling each row (cost) of champions */
+.image-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Space between images (between columns) */
+  padding: 8px;
+  /* box-shadow: 0 0 8px 4px var(--glow-colour); /* Colour passed in at render, depends on champion cost */
+}
+
+/* Remove margin from the last row */
+.image-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Styling individual images */
+.image-item {
+  width: 75px;
+  height: 75px; 
+  object-fit: cover; /* Maintain aspect ratio and fill the square (helps if we don't have a square champion icon) */
+  object-position: right; /* Crop the left side of the image */
+  border: 2px solid #bbbbbbe0; /* Default 1-cost border colour */
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth scaling and shadow on hover */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+/* Add hover effect to images */
+.image-item:hover {
+  transform: scale(1.1); /* Slightly enlarge image on hover */
+  box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6); /* Enhance shadow on hover */
+}
+
+/* Container for selected images */
+.selected-images {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the selected images list */
+.selected-images__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 15px; /* Space between selected image card */
+  flex-grow: 0;  /* Prevent grid from growing */
+  max-width: 100%; /* Ensure the grid doesn’t exceed container size */
+}
+
+/* Individual selected image item */
+.selected-image-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #161616, #0a0b0b);
+  height: 250px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  position: relative;
+  box-shadow: 0 0 8px 2px var(--glow-colour);
+  transition: box-shadow 0.2s ease;
+}
+
+.selected-image-item:hover {
+  box-shadow: 0 0 16px 4px var(--glow-colour);
+}
+
+/* Remove margin from the last selected image */
+.selected-image-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Styling the selected image */
+.selected-image {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  object-position: right;
+  border-radius: 4px;
+  border: 2px solid #bbbbbbe0;
+}
+
+/* Styling the remove button (X) */
+.remove-button {
+  position: absolute; /* Enables placement within .selected-image-item */
+  top: 12px; /* Adjust as needed for spacing */
+  right: 12px; /* Adjust as needed for spacing */
+  background: rgba(236, 236, 236, 0.8);
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Hover effect on remove button */
+.remove-button:hover {
+  background: #f44336;
+}
+
+/* Media Query for medium screens */
+@media (max-width: 1450px) {
+  .image-row {
+    gap: 6px; /* Space between images in a row */
+    margin-bottom: 10px; /* Add space below each row */
+  }
+
+  .image-item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .selected-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .selected-images__grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  }
+}
+
+/* Media Query for small screens */
+@media (max-width: 900px) {
+  .image-row {
+    gap: 3px; /* Space between images in a row */
+    margin-bottom: 5px; /* Add space below each row */
+  }
+  .image-item {
+    width: 25px;
+    height: 25px;
+  }
+
+  .selected-image {
+    width: 25px;
+    height: 25px;
+  }
+
+  .selected-images__grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 items per row */
+  }
+}
+
+/* Styling for selected champion dropdowns */
+.selected-champion-dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Space between the dropdown menus */
+  margin-left: 20px; /* Space between the selected images and dropdowns */
+}
+
+/* Styling selected champion dropdown items */
+.selected-champion-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.reset-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 30px 0px 15px 0px;
+  transition: transform 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #e13232;
+  transform: scale(1.05);
+}
+
+.simulate-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.simulate-button {
+  padding: 16px 32px;
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 12px;
+  font-size: 48px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  width: 400px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.simulate-button:hover {
+  background-color: rgb(255, 255, 255);
+  transform: scale(1.05);
+}
+
+.simulate-button:active {
+  transform: scale(1.0);
+}
+
+.level-gold-container,
+.champs-out-dropdown-container,
+.duplicator-dropdowns {
+  display: flex;
+  flex-direction: column;
+}
+
+.final-config-header {
+  align-self: flex-end;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.label-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.label-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.champions-out-container {
+  justify-content: center;
+}
+
+.dropdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 12px auto;
+  width: fit-content;
+}
+
+.dropdown-row-label {
+  width: 100px;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.dropdown-row-select {
+  width: 100px;
+}
+
+.final-config-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px; /* space between columns */
+}
+
+/* Default dropdown styling */
+select,
+input[type="number"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+select:hover,
+input[type="number"]:hover {
+  border-color: #888;
+}
+
+select:focus,
+input[type="number"]:focus {
+  border-color: #555;
+}
+
+/* Default number textbox styling */
+input[type="number"] {
+  width: 74px;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-title {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.results-text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.results-text-large {
+  font-size: 32px;
+}
